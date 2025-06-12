@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>News Website</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+    }
+    #news-buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 10px;
+      background-color: #f5f5f5;
+      border-bottom: 1px solid #ccc;
+    }
+    #news-buttons button {
+      padding: 8px 16px;
+      font-size: 16px;
+      cursor: pointer;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #fff;
+    }
+    #news-list {
+      padding: 20px;
+    }
+    .news-item {
+      margin-bottom: 10px;
+      font-size: 18px;
+      cursor: pointer;
+      color: blue;
+      text-decoration: underline;
+    }
+    #news-detail {
+      padding: 20px;
+      background-color: #f0f0f0;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="news-buttons"></div>
+  <div id="news-list"></div>
+  <div id="news-detail"></div>
+
+  <script>
+    const newsCategories = [
+      'World', 'Politics', 'Business', 'Technology', 'Science',
+      'Health', 'Sports', 'Entertainment', 'Travel', 'Opinion'
+    ];
+
+    const buttonContainer = document.getElementById('news-buttons');
+    const newsList = document.getElementById('news-list');
+    const newsDetail = document.getElementById('news-detail');
+
+    newsCategories.forEach(category => {
+      const button = document.createElement('button');
+      button.textContent = category;
+      button.addEventListener('click', () => {
+        newsList.innerHTML = '';
+        newsDetail.style.display = 'none';
+
+        if (category === 'World') {
+          const newsItem = document.createElement('div');
+          newsItem.textContent = 'China Invades Taiwan';
+          newsItem.className = 'news-item';
+          newsItem.addEventListener('click', () => {
+            newsDetail.style.display = 'block';
+            newsDetail.innerHTML = `
+              <h2>China Invades Taiwan</h2>
+              <p>In a major development in East Asia, China has launched a full-scale invasion of Taiwan. 
+              The global community is reacting to this unprecedented escalation...</p>
+              <p><strong>Details are still unfolding.</strong></p>
+            `;
+          });
+          newsList.appendChild(newsItem);
+        }
+      });
+      buttonContainer.appendChild(button);
+    });
+  </script>
+
+</body>
+</html>
