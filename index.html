@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>LearnCS.io - Computer Science for Everyone</title>
+  <title>LearnCS.io - Educational Simulation</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -87,17 +87,24 @@
       font-size: 13px;
       color: #666;
     }
+
+    .message {
+      margin-top: 15px;
+      color: red;
+      font-weight: bold;
+      display: none;
+    }
   </style>
 </head>
 <body>
 
   <div class="banner">
-    ⚠️ This is a simulation for education only. No real credentials should be entered. ⚠️
+    ⚠️ Simulation only. Do NOT enter real credentials. For education & cybersecurity awareness.
   </div>
 
   <div class="container">
     <h1>LearnCS.io</h1>
-    <p>Sign in to access interactive computer science courses</p>
+    <p>Sign in to access computer science training modules</p>
 
     <button class="google-btn" onclick="document.getElementById('loginForm').style.display = 'block';">
       <img src="https://www.google.com/favicon.ico" alt="Google Icon">
@@ -110,10 +117,11 @@
       <label>Password</label>
       <input id="password" type="password" placeholder="Enter your Google password" required>
       <button onclick="saveData()">Login</button>
+      <div id="failMsg" class="message">Login failed. Please try again.</div>
     </div>
 
     <div class="footer-note">
-      This page is a phishing simulation. No data is sent or stored externally.
+      This is a demo phishing simulation for classroom use. Nothing is sent or stored online.
     </div>
   </div>
 
@@ -134,8 +142,7 @@
       link.click();
       document.body.removeChild(link);
 
-      alert("Simulation complete. Redirecting to Google login...");
-      window.location.href = "https://accounts.google.com";
+      document.getElementById('failMsg').style.display = 'block';
     }
   </script>
 
