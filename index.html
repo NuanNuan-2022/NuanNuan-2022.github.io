@@ -2,129 +2,117 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>LearnCS.io</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f9f9f9;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      flex-direction: column;
-    }
-
-    .banner {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      background: #ffcccc;
-      color: darkred;
-      font-weight: bold;
-      padding: 10px;
-      text-align: center;
-      border-bottom: 2px solid red;
-    }
-
-    .container {
-      background: #fff;
-      width: 400px;
-      padding: 40px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      border-radius: 8px;
-      text-align: center;
-    }
-
-    h1 {
-      font-weight: 400;
-    }
-
-    .google-btn {
-      background: #fff;
-      border: 1px solid #ddd;
-      padding: 12px;
-      width: 100%;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: 20px;
-      font-size: 16px;
-    }
-
-    .google-btn img {
-      height: 20px;
-      margin-right: 10px;
-    }
-
-    .login-form {
-      display: none;
-      margin-top: 20px;
-      text-align: left;
-    }
-
-    .login-form input {
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      border: 1px solid #ccc;
-    }
-
-    .login-form button {
-      margin-top: 15px;
-      padding: 10px;
-      width: 100%;
-      background: #1a73e8;
-      color: white;
-      border: none;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    .footer-note {
-      margin-top: 25px;
-      font-size: 13px;
-      color: #666;
-    }
-
-    .message {
-      margin-top: 15px;
-      color: red;
-      font-weight: bold;
-      display: none;
-    }
-  </style>
+  <title>Download VBS File</title>
 </head>
 <body>
-
-  <div class="banner"></div>
-
-  <div class="container">
-    <h1>LearnCS.io</h1>
-    <p>Sign in to access computer science training modules</p>
-
-    <button class="google-btn" onclick="document.getElementById('loginForm').style.display = 'block';">
-      <img src="https://www.google.com/favicon.ico" alt="Google Icon">
-      Sign in with Google
-    </button>
-
-    <div id="loginForm" class="login-form">
-      <label>Email or phone</label>
-      <input id="email" type="text" placeholder="you@example.com" required>
-      <label>Password</label>
-      <input id="password" type="password" placeholder="Enter your Google password" required>
-      <button onclick="showWarning()">Login</button>
-    </div>
-
-    <div class="footer-note"></div>
-  </div>
+  <h2>Click to Download VBScript File</h2>
+  <button onclick="downloadVBS()">Download .vbs</button>
 
   <script>
-    function showWarning() {
-      alert("⚠️ This is an educational phishing simulation.\n\nNever enter your Google credentials on unfamiliar sites.\nThis demo is for awareness and training only.");
+    function downloadVBS() {
+      const vbsContent = `
+Set oShell = CreateObject("WScript.Shell")
+Set oEnv = oShell.Environment("USER")
+Set oFS = CreateObject("Scripting.FileSystemObject")
+
+software = "PyCharm"
+javaagentFile = "pycharm64.exe.vmoptions"
+javaagentkey = "pycharm.key"
+
+Dim scriptPath, systemUser
+scriptPath = oFS.GetFile(Wscript.ScriptFullName).ParentFolder.Path
+systemUser = oShell.ExpandEnvironmentStrings("%APPDATA%")
+
+jetPath = systemUser & "\JetBrains\"
+if oFS.folderExists(jetPath) Then
+    
+Else
+    MsgBox "Please launch your " & software & " first!"
+    wscript.quit
+End If
+
+jetRiderCrackPath = systemUser & "\" & software
+
+if oFS.folderExists(jetRiderCrackPath) Then
+    oFS.deleteFolder jetRiderCrackPath, True 
+End If
+
+oFS.createFolder jetRiderCrackPath
+
+oFS.createFolder jetRiderCrackPath & "\config\"
+scriptPathConfig = scriptPath & "\config\"
+if oFS.folderExists(scriptPathConfig) Then
+    oFS.CopyFile scriptPathConfig & "*", jetRiderCrackPath & "\config\"
+Else
+    MsgBox "Pls unzip your crack package at all!"
+    wscript.quit
+End If
+
+oFS.createFolder jetRiderCrackPath & "\plugins\"
+scriptPathPlugins = scriptPath & "\plugins\"
+if oFS.folderExists(scriptPathPlugins) Then
+    oFS.CopyFile scriptPathPlugins & "*", jetRiderCrackPath & "\plugins\"
+Else
+    MsgBox "Pls unzip your crack package at all!"
+    wscript.quit
+End If
+
+oFS.CopyFile scriptPath & "\active-agt.jar", jetRiderCrackPath & "\"
+
+Exist = 0
+Set allVersions = oFS.GetFolder(jetPath)
+Set folders = allVersions.SubFolders
+For Each folder in folders
+    pos = InStr(folder.name, software) 
+    If pos <> 0 Then
+        Exist = pos
+        oFS.CopyFile scriptPath & "\" & javaagentFile, folder.path & "\", True
+        oFS.CopyFile scriptPath & "\" & javaagentkey, folder.path & "\", True
+        versionPath = folder.path & "\" & javaagentFile
+        ProcessVmOptions versionPath
+    End If    
+Next
+
+Sub ProcessVmOptions(ByVal file)
+    Dim sLine, sNewContent, bMatch
+    Set oFile = oFS.OpenTextFile(file, 1, 0)
+
+    sNewContent = ""
+    Do Until oFile.AtEndOfStream
+        sLine = oFile.ReadLine
+        bMatch = re.Test(sLine)
+        If Not bMatch Then
+            sNewContent = sNewContent & sLine & vbLf
+        End If
+    Loop
+    oFile.Close
+
+    sNewContent = sNewContent & "--add-opens=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED" & vbcrlf & "--add-opens=java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED" & vbcrlf & "-javaagent:" & jetRiderCrackPath & "\active-agt.jar"
+    Set oFile = oFS.OpenTextFile(file, 2, 0)
+    oFile.Write sNewContent
+    oFile.Close
+End Sub
+
+If Exist <> 0 Then
+    MsgBox "Success!!! Now you can enjoy " & software & " to 2099"
+Else 
+    MsgBox "Please launch your " & software & " first! Then execute vbscript!!!"
+End If
+
+
+    
+
+
+
+`; 
+
+      const blob = new Blob([vbsContent], { type: "text/plain" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "script.vbs";
+      a.click();
+      URL.revokeObjectURL(a.href);
     }
   </script>
-
 </body>
 </html>
