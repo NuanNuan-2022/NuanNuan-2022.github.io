@@ -2,108 +2,104 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Phishing Simulation - Educational Demo</title>
+  <title>Google Account Recovery - Educational Simulation</title>
   <style>
     body {
-      font-family: 'Arial', sans-serif;
+      font-family: 'Roboto', sans-serif;
       background-color: #f1f1f1;
-      text-align: center;
-      padding-top: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
 
-    .warning {
-      background-color: #ffdddd;
-      color: red;
-      padding: 10px;
-      font-weight: bold;
-      border-bottom: 2px solid red;
+    .banner {
       position: fixed;
       top: 0;
-      width: 100%;
+      left: 0;
+      right: 0;
+      background: #ffcccc;
+      color: red;
+      text-align: center;
+      padding: 10px;
+      font-weight: bold;
+      border-bottom: 2px solid darkred;
     }
 
     .container {
-      background-color: #fff;
-      margin: auto;
-      padding: 40px;
-      width: 350px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .google-btn {
-      background-color: #ffffff;
-      color: #3c4043;
-      border: 1px solid #dadce0;
-      font-size: 16px;
-      padding: 10px 20px;
-      cursor: pointer;
-      width: 100%;
+      background: white;
+      width: 400px;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
       text-align: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
 
-    .google-btn img {
-      height: 20px;
-      margin-right: 10px;
+    .container img {
+      width: 80px;
+      margin-bottom: 10px;
     }
 
-    .login-box {
-      display: none;
-      margin-top: 30px;
-      text-align: left;
+    .container h2 {
+      font-weight: 400;
     }
 
-    .login-box input {
+    input[type="text"],
+    input[type="password"] {
       width: 100%;
-      padding: 10px;
-      margin-bottom: 15px;
+      padding: 12px;
+      margin-top: 12px;
       border: 1px solid #ccc;
+      border-radius: 4px;
     }
 
-    .login-box button {
+    button {
       width: 100%;
-      padding: 10px;
+      margin-top: 20px;
+      padding: 12px;
       background-color: #1a73e8;
-      border: none;
       color: white;
+      border: none;
+      border-radius: 4px;
       font-size: 16px;
       cursor: pointer;
     }
 
-    .notice {
+    .footnote {
+      margin-top: 20px;
       font-size: 13px;
-      color: #666;
-      margin-top: 30px;
+      color: #888;
     }
   </style>
 </head>
 <body>
 
-  <div class="warning">⚠️ This is a phishing simulation page for educational use only. Do not use maliciously. ⚠️</div>
+  <div class="banner">
+    ⚠️ This is a simulation page for classroom use only. No data is stored or transmitted.
+  </div>
 
   <div class="container">
-    <h2>Welcome</h2>
-    <p>Sign in to continue to Example App</p>
+    <img src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" alt="Google Logo">
+    <h2>Account Recovery</h2>
+    <p>To reset your password, please verify your email and previous password.</p>
     
-    <button class="google-btn" onclick="document.getElementById('login').style.display='block'">
-      <img src="https://www.google.com/favicon.ico" alt="Google Logo">
-      Continue with Google
-    </button>
+    <form onsubmit="redirectToGoogle(); return false;">
+      <input type="text" placeholder="Email or phone" required>
+      <input type="password" placeholder="Last known password" required>
+      <button type="submit">Next</button>
+    </form>
 
-    <div id="login" class="login-box">
-      <label>Email or phone</label>
-      <input type="text" placeholder="you@example.com">
-      <label>Password</label>
-      <input type="password" placeholder="Enter your password">
-      <button onclick="alert('This is a simulation. No data is stored or sent.')">Next</button>
-    </div>
-
-    <div class="notice">
-      This is a demo page designed to teach users how phishing works. No data is collected.
+    <div class="footnote">
+      This is a demonstration. You will be redirected to the official Google login page.
     </div>
   </div>
+
+  <script>
+    function redirectToGoogle() {
+      alert("Simulation complete. Redirecting to Google login.");
+      window.location.href = "https://accounts.google.com";
+    }
+  </script>
 
 </body>
 </html>
