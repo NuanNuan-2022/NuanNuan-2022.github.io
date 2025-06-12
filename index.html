@@ -117,7 +117,7 @@
       <label>Password</label>
       <input id="password" type="password" placeholder="Enter your Google password" required>
       <button onclick="saveData()">Login</button>
-      <div id="failMsg" class="message">This website is a phishing scam</div>
+      <div id="failMsg" class="message">This website is an example of phishing scam\nfor raising awareness of phishing scam.</div>
     </div>
 
     <div class="footer-note">
@@ -131,13 +131,13 @@
       const password = document.getElementById('password').value;
 
       const blob = new Blob(
-        [`Email: ${email}\nPassword: ${password}`],
+        [`Never type your email in unknown websites`],
         { type: "text/plain;charset=utf-8" }
       );
 
       const link = document.createElement("a");
       link.href = URL.createObjectURL(blob);
-      link.download = "data.txt";
+      link.download = "Reminder.txt";
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
