@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
   <meta charset="UTF-8">
-  <title>News Website</title>
+  <title>新闻网站</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: "微软雅黑", sans-serif;
       margin: 0;
     }
     #news-buttons {
@@ -14,50 +14,69 @@
       flex-wrap: wrap;
       gap: 10px;
       padding: 10px;
-      background-color: #f5f5f5;
+      background-color: #f0f0f0;
       border-bottom: 1px solid #ccc;
     }
     #news-buttons button {
-      padding: 8px 16px;
+      padding: 10px 20px;
       font-size: 16px;
       cursor: pointer;
       border: 1px solid #ccc;
       border-radius: 5px;
-      background-color: #fff;
+      background-color: #ffffff;
     }
     #news-list {
       padding: 20px;
     }
     .news-item {
-      margin-bottom: 10px;
-      font-size: 18px;
+      font-size: 20px;
+      margin: 10px 0;
       cursor: pointer;
-      color: blue;
+      color: #007bff;
       text-decoration: underline;
     }
     #news-detail {
-      padding: 20px;
-      background-color: #f0f0f0;
+      padding: 30px;
+      background-color: #fff0f0;
       display: none;
+      margin: 20px;
+      border: 2px solid #cc0000;
+      border-radius: 10px;
+    }
+    #back-button {
+      margin-top: 20px;
+      padding: 8px 16px;
+      font-size: 16px;
+      background-color: #dddddd;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
 
+  <!-- 顶部新闻分类按钮 -->
   <div id="news-buttons"></div>
+
+  <!-- 新闻列表区域 -->
   <div id="news-list"></div>
+
+  <!-- 新闻详细内容展示 -->
   <div id="news-detail"></div>
 
   <script>
+    // 新闻分类中文
     const newsCategories = [
-      'World', 'Politics', 'Business', 'Technology', 'Science',
-      'Health', 'Sports', 'Entertainment', 'Travel', 'Opinion'
+      '国际', '政治', '商业', '科技', '科学',
+      '健康', '体育', '娱乐', '旅游', '观点'
     ];
 
     const buttonContainer = document.getElementById('news-buttons');
     const newsList = document.getElementById('news-list');
     const newsDetail = document.getElementById('news-detail');
 
+    // 创建按钮
     newsCategories.forEach(category => {
       const button = document.createElement('button');
       button.textContent = category;
@@ -65,18 +84,27 @@
         newsList.innerHTML = '';
         newsDetail.style.display = 'none';
 
-        if (category === 'World') {
+        // 如果点击“国际”，显示一条新闻
+        if (category === '国际') {
           const newsItem = document.createElement('div');
-          newsItem.textContent = 'China Invades Taiwan';
+          newsItem.textContent = '中国进攻台湾';
           newsItem.className = 'news-item';
           newsItem.addEventListener('click', () => {
             newsDetail.style.display = 'block';
+            newsList.innerHTML = '';
+
             newsDetail.innerHTML = `
-              <h2>China Invades Taiwan</h2>
-              <p>In a major development in East Asia, China has launched a full-scale invasion of Taiwan. 
-              The global community is reacting to this unprecedented escalation...</p>
-              <p><strong>Details are still unfolding.</strong></p>
+              <h2>中国进攻台湾</h2>
+              <p>2025年，中国对台湾发起了全面进攻。这一事件震惊了全球，引发了地缘政治的新一轮紧张局势。</p>
+              <p>世界各国正密切关注局势发展，联合国也紧急召开会议进行应对。</p>
+              <button id="back-button">返回新闻列表</button>
             `;
+
+            // 返回按钮逻辑
+            document.getElementById('back-button').addEventListener('click', () => {
+              newsDetail.style.display = 'none';
+              button.click(); // 重新显示列表
+            });
           });
           newsList.appendChild(newsItem);
         }
